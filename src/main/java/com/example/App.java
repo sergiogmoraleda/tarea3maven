@@ -33,13 +33,7 @@ public class App {
 			switch (opcion) {
 				case 1:
 
-					/*
-					 * Problema problema = new Problema();
-					 * //problema = JsonUtil.leerProblema("src/main/java/com/example/p0.json");
-					 * Estado E= problema.leerProblema("src/main/java/com/example/p0.json");
-					 * List<Bottle> listaBotellas = E.getEstado();
-					 * int bottleSize = problema.getBottleSize();
-					 */
+
 
 					Problema problema = new Problema("src/main/java/com/example/p0.json");
 
