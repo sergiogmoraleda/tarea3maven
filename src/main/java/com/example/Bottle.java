@@ -1,16 +1,14 @@
 package com.example;
 
-
 import java.util.*;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+
 
 public class Bottle implements JsonUtil {
 	private Stack<Liquid> liquido;
 
 	public Bottle() {
-		liquido = new Stack();
+		liquido = new Stack<>();
 	}
 
 	public Bottle(Stack<Liquid> liquido) {
@@ -29,22 +27,7 @@ public class Bottle implements JsonUtil {
 		setLiquido(liquido);
 		return this;
 	}
-/* 
-	@Override
-	public boolean equals(Object o) {
-		if (o == this)
-			return true;
-		if (!(o instanceof Bottle)) {
-			return false;
-		}
-		Bottle bottle = (Bottle) o;
-		return Objects.equals(liquido, bottle.liquido);
-	}
- */
-	@Override
-	public int hashCode() {
-		return Objects.hashCode(liquido);
-	}
+	
 
 	@Override
 	public String toString() {
@@ -79,7 +62,7 @@ public class Bottle implements JsonUtil {
 	public int getCantDeArriba() {
 		return liquido.peek().getCant();
 	}
-	public void añadirLiquido(Liquid l) {
+	public void anadirLiquido(Liquid l) {
 		liquido.add(l);
 	}
 
@@ -91,19 +74,7 @@ public class Bottle implements JsonUtil {
 		return cantBotella;
 	}
 	//clonamos el objeto
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		Bottle cloned =  (Bottle) super.clone();
-		cloned.liquido = new Stack<Liquid>();
-		Stack<Liquid> aux = new Stack<Liquid>();
-		for (Liquid l : liquido) {
-			aux.push(l);
-		}
-		for (Liquid l : aux) {
-			cloned.liquido.push((Liquid)l.clone());
-		}
-		return cloned;
-	}
+
 	
 
 
@@ -123,18 +94,21 @@ public class Bottle implements JsonUtil {
         
     }
 	public String getStringBottle(){
-		String s = "[";
+		StringBuilder s= new StringBuilder();
+		s.append("[");
+		
 		Stack<Liquid> botella = getLiquido();
 		for(int i = botella.size()-1; i >= 0; i--) {
 			if(i>0) {
-				s += botella.get(i).toString() + ",";
+				s.append(botella.get(i).toString() + ",");
 			}
 			if(i== 0){
-				s += botella.get(i).toString();
+				s.append(botella.get(i).toString());
 			}
 		}
-		s += "]";
-		return s;
+		s.append("]");
+		return s.toString();
+		
 
 	}
 

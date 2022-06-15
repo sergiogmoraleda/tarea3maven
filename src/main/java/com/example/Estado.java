@@ -1,50 +1,40 @@
 package com.example;
 
 import java.util.ArrayList;
-import java.util.EmptyStackException;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Queue;
-import java.util.Stack;
-import java.security.*;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
-import java.io.Serializable;
-import java.lang.Cloneable;
-import java.math.BigInteger;
 
-public class Estado implements Serializable, JsonUtil {
 
-    private List<Bottle> estado;
+
+public class Estado implements  JsonUtil {
+
+    private List<Bottle> e;
     private int bottleSize;
 
     public Estado() {
     }
 
     public Estado(List<Bottle> estado, int bottleSize) {
-        this.estado = estado;
+        this.e = estado;
         this.bottleSize = bottleSize;
     }
 
     public Estado(Estado accion) {
-        this.estado = accion.getEstado();
+        this.e = accion.getEstado();
         this.bottleSize = accion.getBottleSize();
     }
 
     public Estado(List<Bottle> listaBotellas) {
-        this.estado = listaBotellas;
+        this.e = listaBotellas;
     }
 
     public List<Bottle> getEstado() {
-        return estado;
+        return e;
     }
 
     public void setEstado(List<Bottle> estado) {
-        this.estado = estado;
+        this.e = estado;
     }
 
     public int getBottleSize() {
@@ -65,21 +55,6 @@ public class Estado implements Serializable, JsonUtil {
         return this;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Estado)) {
-            return false;
-        }
-        Estado estado = (Estado) o;
-        return Objects.equals(estado, estado.estado) && Objects.equals(bottleSize, estado.bottleSize);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(estado, bottleSize);
-    }
 
     @Override
     public String toString() {
@@ -92,15 +67,15 @@ public class Estado implements Serializable, JsonUtil {
     }
 
     public int indexOfBottle(Bottle bottle) {
-        return estado.indexOf(bottle);
+        return e.indexOf(bottle);
 
     }
 
     public Estado deepCopy() {
-        List<Bottle> listaBotellas = new ArrayList<Bottle>();
+        List<Bottle> listaBotellas = new ArrayList<>();
         Bottle auxiliar = null;
-        for (int i = 0; i < this.estado.size(); i++) {
-            auxiliar = this.estado.get(i);
+        for (int i = 0; i < this.e.size(); i++) {
+            auxiliar = this.e.get(i);
             listaBotellas.add(auxiliar.deepCopy());
 
         }
@@ -110,41 +85,31 @@ public class Estado implements Serializable, JsonUtil {
     }
     // copiamos objeto sin que se cambie el original
 
-    // clonamos objeto
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        Estado cloned = (Estado) super.clone();
-        cloned.estado = new ArrayList<Bottle>();
-        for (Bottle bottle : this.estado) {
-            cloned.estado.add((Bottle) bottle.clone());
-        }
-        return cloned;
-    }
-
-    public boolean ES_AccionPosible(Bottle botOrigen, Bottle botDestino, int cantidad) {
-        boolean ES_AccionPosible = false;
+  
+    public boolean eSAccionPosible(Bottle botOrigen, Bottle botDestino, int cantidad) {
+        boolean esAccionPosible = false;
         if (!botOrigen.getLiquido().isEmpty()) {
             if (!botDestino.getLiquido().isEmpty()) {
                 if ((botDestino.getCantidadliquido() + cantidad) <= this.bottleSize
                         && botDestino.getLiquido().peek().getColor() == botOrigen.getLiquido().peek().getColor()) {
-                    ES_AccionPosible = true;
+                    esAccionPosible = true;
                 }
             } else {
-                ES_AccionPosible = true;
+                esAccionPosible = true;
             }
         }
 
-        return ES_AccionPosible;
+        return esAccionPosible;
     }
 
-    public Estado Accion(Bottle botOrigen, Bottle botDestino, int cantidad) throws CloneNotSupportedException {
+    public Estado accion(Bottle botOrigen, Bottle botDestino, int cantidad) {
 
         int botOrigenIndex = this.indexOfBottle(botOrigen);
         int botDestinoIndex = this.indexOfBottle(botDestino);
 
         // creamos una copia del estado
         Estado estadoCopia = this.deepCopy();
-        if (ES_AccionPosible(botOrigen, botDestino, cantidad)) {
+        if (eSAccionPosible(botOrigen, botDestino, cantidad)) {
             if (estadoCopia.getEstado().get(botDestinoIndex).getLiquido().isEmpty()) {
                 estadoCopia.getEstado().get(botDestinoIndex).getLiquido().push(estadoCopia.getEstado().get(botOrigenIndex).getLiquido().pop());
             } else {
@@ -156,40 +121,35 @@ public class Estado implements Serializable, JsonUtil {
         return estadoCopia;
     }
 
-    public String getMD5(String jsonString) {
-        String md5 = "";
-        try {
-            String hash = JsonUtil.getHashMD5(jsonString);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return md5;
-    }
 
     public String getStringEstadoCorrecto() {
-        String stringEstadoCorrecto = "[";
+        StringBuilder stringEstadoCorrecto =  new StringBuilder();
+        stringEstadoCorrecto.append("[");
 
-        List<Bottle> botellas = this.estado;
+
+        List<Bottle> botellas = this.e;
 
         for (int b = 0; b < botellas.size(); b++) {
             if (b != botellas.size() - 1) {
-                stringEstadoCorrecto += botellas.get(b).getStringBottle() + ",";
+                stringEstadoCorrecto.append(botellas.get(b).getStringBottle() + ",");
             } else {
-                stringEstadoCorrecto += botellas.get(b).getStringBottle();
+                stringEstadoCorrecto.append(botellas.get(b).getStringBottle());
             }
 
         }
-        stringEstadoCorrecto += "]";
-        return stringEstadoCorrecto;
+        stringEstadoCorrecto.append("]");
+        
+        
+        return stringEstadoCorrecto.toString();
     }
 
     public String md5() {
-        String md5 = JsonUtil.getHashMD5(getStringEstadoCorrecto());
-        return md5;
+         return  JsonUtil.getHashMD5(getStringEstadoCorrecto());
+        
     }
 
     public void imprimir() {
-        Iterator<Bottle> it = estado.iterator();
+        Iterator<Bottle> it = e.iterator();
         while (it.hasNext()) {
            System.out.print(it.next().getStringBottle());
         }

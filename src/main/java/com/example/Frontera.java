@@ -1,65 +1,50 @@
 package com.example;
 
-import java.util.List;
-import java.util.Objects;
 import java.util.PriorityQueue;
-import java.util.Queue;
 
 public class Frontera {
 
-	private PriorityQueue<Nodo> frontera;
-
+	private PriorityQueue<Nodo> f;
 
 	public Frontera() {
-		this.frontera = new PriorityQueue<Nodo>();
+		this.f = new PriorityQueue<>();
 	}
 
 	public Frontera(PriorityQueue<Nodo> frontera) {
-		this.frontera = frontera;
+		this.f = frontera;
 	}
 
 	public PriorityQueue<Nodo> getFrontera() {
-		return this.frontera;
+		return this.f;
 	}
 
 	public void setFrontera(PriorityQueue<Nodo> frontera) {
-		this.frontera = frontera;
+		this.f = frontera;
 	}
 
 	public Frontera frontera(PriorityQueue<Nodo> frontera) {
 		setFrontera(frontera);
 		return this;
 	}
-/* 
-	@Override
-	public boolean equals(Object o) {
-		if (o == this)
-			return true;
-		if (!(o instanceof Frontera)) {
-			return false;
-		}
-		Frontera frontera = (Frontera) o;
-		return Objects.equals(frontera, frontera.frontera);
-	} */
-	//CLEAR FRONTERA
+
+	// CLEAR FRONTERA
 	public void clear() {
-		this.frontera.clear();
+		this.f.clear();
 	}
-	//ADD
+
+	// ADD
 	public void add(Nodo nodo) {
-		this.frontera.add(nodo);
+		this.f.add(nodo);
 	}
-	//REMOVE
+
+	// REMOVE
 	public Nodo remove() {
-		return this.frontera.remove();
+		return this.f.remove();
 	}
-	//IS EMPTY
+
+	// IS EMPTY
 	public boolean isEmpty() {
-		return this.frontera.isEmpty();
+		return this.f.isEmpty();
 	}
-
-
-	
-
 
 }

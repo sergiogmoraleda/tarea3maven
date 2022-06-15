@@ -1,28 +1,15 @@
 package com.example;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.EmptyStackException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import java.util.PriorityQueue;
-import java.util.Queue;
 import java.util.Stack;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-//import org.json.simple.parser.ParseException;
 
 public class Problema {
 
@@ -35,7 +22,7 @@ public class Problema {
 
     // generamos un problema a partir del fichero y el estado
     public Problema(String ruta)
-            throws FileNotFoundException, IOException, ParseException, org.json.simple.parser.ParseException {
+            throws IOException, org.json.simple.parser.ParseException {
         this.initState = leerProblema(ruta);
         this.bottleSize = this.initState.getBottleSize();
     }
@@ -117,21 +104,21 @@ public class Problema {
     }
 
     public Estado leerProblema(String ruta)
-            throws FileNotFoundException, IOException, ParseException, org.json.simple.parser.ParseException {
-        List<Bottle> botellas = new ArrayList<Bottle>();
+            throws IOException, org.json.simple.parser.ParseException {
+        List<Bottle> botellas = new ArrayList<>();
         JSONParser parser = new JSONParser();
         Object o = parser.parse(new FileReader(ruta));
         JSONObject jsonObject = (JSONObject) o;
 
-        String id = (String) jsonObject.get("id");
-        this.id = id;
+        String idProblema = (String) jsonObject.get("id");
+        this.id = idProblema;
         long bottleSizelong = (long) jsonObject.get("bottleSize"); // es long porque java lang acepta long y no int
 
         this.bottleSize = (int) bottleSizelong;
         JSONArray jsonArray = (JSONArray) jsonObject.get("initState");
 
         for (int i = 0; i < jsonArray.size(); i++) {
-            Liquid l = new Liquid();
+            Liquid l;
             Bottle b = new Bottle();
             JSONArray contenidoBotella = (JSONArray) jsonArray.get(i);
 
@@ -146,7 +133,7 @@ public class Problema {
 
                 }
                 l = new Liquid((int) tuplaLiquido[0], (int) tuplaLiquido[1]);
-                b.añadirLiquido(l);
+                b.anadirLiquido(l);
 
             }
             botellas.add(b);
@@ -169,7 +156,7 @@ public class Problema {
 
                     cont++;
                 }
-            } else if(estado.getEstado().get(i).isEmpty()) { // si la botella esta vacia
+            } else if (estado.getEstado().get(i).isEmpty()) { // si la botella esta vacia
                 cont++;
             }
 
@@ -177,46 +164,39 @@ public class Problema {
         if (cont == estado.getEstado().size()) {
             return esObjetivo;
         } else {
-        esObjetivo = false;
+            esObjetivo = false;
 
         }
         return esObjetivo;
     }
 
-
-    public List<Sucesor> getSucesores(Estado estado) throws CloneNotSupportedException {
+    public List<Sucesor> getSucesores(Estado estado) {
         Sucesor s = null;
 
         List<Sucesor> sucesores = new ArrayList<>();
         int coste = 1;
-        // Estado e = null;
 
         List<Bottle> botellas = estado.getEstado();
 
         for (int i = 0; i < botellas.size(); i++) {
             Bottle b = botellas.get(i);
             Stack<Liquid> pilaOrigen = b.getLiquido();
-            /*
-             * int cantidad = pilaOrigen.size();
-             * int sizeBotellas = botellas.size();
-             */
+
             for (int j = 0; j < botellas.size(); j++) {
 
                 if (!pilaOrigen.isEmpty()) {
                     Bottle d = botellas.get(j);
-                    // System.out.println(botellas.indexOf(d));
-                    int cant = b.getCantDeArriba();
-                    if (i != j) {
-                        if (estado.ES_AccionPosible(b, d, cant) == true) {
-                            Estado estadoNuevo = null;
-                            estadoNuevo = new Estado(estado.Accion(b, d, cant));
-                            Accion a = new Accion(i, j, cant);
-                            s = new Sucesor(a, estadoNuevo, coste);
-                            estadoNuevo = null;
-                            a = null;
-                            sucesores.add(s);
 
-                        }
+                    int cant = b.getCantDeArriba();
+                    if (i != j && estado.eSAccionPosible(b, d, cant)) {
+
+                        Estado estadoNuevo = null;
+                        estadoNuevo = new Estado(estado.accion(b, d, cant));
+                        Accion a = new Accion(i, j, cant);
+                        s = new Sucesor(a, estadoNuevo, coste);
+                      
+                        sucesores.add(s);
+
                     }
                 }
             }

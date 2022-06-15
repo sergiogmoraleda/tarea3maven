@@ -1,11 +1,8 @@
 package com.example;
  
  
-import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+
 
 
 
@@ -142,88 +139,72 @@ public class Nodo implements Comparable<Nodo> {
         return this;
     }
 
-   /*  @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Nodo)) {
-            return false;
-        }
-        Nodo nodo = (Nodo) o;
-        return id == nodo.id && costoAcumulado == nodo.costoAcumulado && Objects.equals(estado, nodo.estado) && Objects.equals(padre, nodo.padre) && Objects.equals(accion, nodo.accion) && profundidad == nodo.profundidad && heuristica == nodo.heuristica && valor == nodo.valor;
-    } */
+ 
 
+  
+    public String getMD5deEstado() throws NullPointerException{
+        String jsonCorrecto = getEstado().getStringEstadoCorrecto();
+        return  JsonUtil.getHashMD5(jsonCorrecto);
+        
+    }
+    //hashCode()
     @Override
     public int hashCode() {
-        return Objects.hash(id, costoAcumulado, estado, padre, accion, profundidad, heuristica, valor);
+        int hash = 7;
+        hash = 97 * hash + this.id;
+        return hash;
     }
-    public String getMD5deEstado() throws NullPointerException, CloneNotSupportedException{
-        String jsonCorrecto = getEstado().getStringEstadoCorrecto();
-        String MD5 = JsonUtil.getHashMD5(jsonCorrecto);
-        return MD5;
-    }
- /*    public String toString() {
-        String result = "";
+    //equals
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
         
-        String jsonString = JsonUtil.deListaDeBotellasToJsonString(getEstado().getEstado());
-       
-            try {
-                result = "[" +
-                        "" + getId() + "]" +
-                        "[" + getCostoAcumulado() + ", " +
-                        "" + getMD5deEstado() + ", " +
-                        "" + getPadre() + ", " +
-                        "" + getAccion() + ", " +
-                        "" + getProfundidad() + ", " +
-                        "" + getHeuristica() + ", " +
-                        "" + getValor() + "" +
-                        "]";
-            } catch (NullPointerException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (CloneNotSupportedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-       
-        return result; */
-    //}
+        final Nodo other = (Nodo) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
     @Override //nos servira para la priority queue de frontera
     public int compareTo(Nodo o) {
         int result = 0;
         if(o.getValor()<getValor()){
-            result =+1;
+            result +=1;
         }else if(o.getValor()>getValor()){
-            result =-1;
+            result -=1;
         } else{
             if(o.getId()<getId()){
-                result =+1;
+                result +=1;
             }else{
-                result =-1;
+                result -=1;
             }
         }
         return result;
     }
     public double calcularValorEstrategia(String estrategia, Nodo nodo) {
-        double valor = 0;
+        double valorr = 0;
         switch (estrategia) {
             case "BREADTH":
-                valor = nodo.getProfundidad();
+                valorr = nodo.getProfundidad();
                 break;
             case "DEPTH":
-                valor = 1 /((double)(nodo.getProfundidad() + 1));
+                valorr = 1 /((double)(nodo.getProfundidad() + 1));
                 break;
             case "UNIFORM":
-                valor = nodo.costoAcumulado;
+                valorr = nodo.costoAcumulado;
                 break;
             case "GREEDY":
-                valor = nodo.heuristica;
+                valorr = nodo.heuristica;
                 break;
             case "A":
-                valor = nodo.costoAcumulado + nodo.heuristica;
+                valorr = nodo.costoAcumulado + nodo.heuristica;
                 break;
+                default:
+                    valorr = nodo.getProfundidad();
         }
-        return valor;
+        return valorr;
     }
     
 
@@ -261,50 +242,5 @@ public class Nodo implements Comparable<Nodo> {
               
         return result;
     }
-    
-    // Objeto comparable para la priorityqueues de los nodos
-
-    // metodos del nodo para el arbol de busqueda
-
-    /*
-     * 1. LEER PROBLEMA(YA HECHO SI VES EL MAIN HAY UN METODO QUE LEE UN PROBLEMA)
-     *
-
-    public void LeerProblema() {
-        Problema problema = new Problema();
-        problema = JsonUtil.leerProblema("src/main/java/com/example/p0.json");
-        List<Bottle> listaBotellas = problema.getInitState().getEstado();
-        Estado e = new Estado(listaBotellas);
-        List<Sucesor> listaSucesores;
-        /*
-         * try {
-         * listaSucesores = problema.getSucesores(e);
-         * for (Sucesor s : listaSucesores) {
-         * System.out.println(s.toString());
-         * System.out.println("\n\n,\n\n");
-         * }
-         * } catch (CloneNotSupportedException e1) {
-         * // TODO Auto-generated catch block
-         * e1.printStackTrace();
-         * }
-         
-
-    }
-
-    /*
-     * 2. Generar Nodo a partir de estado inicial(metodo generarNodoINicial o algo
-     * asi)
-     *
-
-   
-    public float calcularHeurista() {
-        float h = 0;
-        int coloresVistos[];
-        return h;
-    }
-
   
-
-}
- */
 }
