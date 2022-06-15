@@ -59,7 +59,7 @@ public class App {
 					algoritmoBusqueda(problema, estrategiaString, 1000000);
 				} catch (IOException e1) {
 					logger.log(java.util.logging.Level.SEVERE, "Error al leer el fichero: {0}", e1.getMessage());
-					e1.printStackTrace();
+					
 				}
  
 					break;
