@@ -1,9 +1,8 @@
 package com.example;
 
 
-import java.io.BufferedReader;
+
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
@@ -12,14 +11,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.PriorityQueue;
+
 import java.util.Scanner;
-import java.util.Stack;
-import com.google.gson.*;
+
 
 public class App {
 
-	public static void menu() throws FileNotFoundException, IOException, ParseException, org.json.simple.parser.ParseException, CloneNotSupportedException{
+	public static void menu() throws IOException, ParseException, org.json.simple.parser.ParseException, CloneNotSupportedException{
 		final Scanner sc = new Scanner(System.in);
 		boolean salir = false;
 		int opcion = -1;
