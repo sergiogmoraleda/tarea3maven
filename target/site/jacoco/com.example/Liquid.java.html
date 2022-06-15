@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Liquid.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tarea3maven</a> &gt; <a href="index.source.html" class="el_package">com.example</a> &gt; <span class="el_source">Liquid.java</span></div><h1>Liquid.java</h1><pre class="source lang-java linenums">package com.example;
+
+import java.util.Objects;
+
+public class Liquid  {
+    private int color;
+    private int cant;
+
+<span class="nc" id="L9">    public Liquid() {</span>
+<span class="nc" id="L10">    }</span>
+
+<span class="nc" id="L12">    public Liquid(int color, int cant) {</span>
+<span class="nc" id="L13">        this.color = color;</span>
+<span class="nc" id="L14">        this.cant = cant;</span>
+<span class="nc" id="L15">    }</span>
+
+<span class="nc" id="L17">    public Liquid(Liquid l) {</span>
+<span class="nc" id="L18">        this.color = l.color;</span>
+<span class="nc" id="L19">        this.cant = l.cant;</span>
+<span class="nc" id="L20">    }</span>
+
+    public int getColor() {
+<span class="nc" id="L23">        return this.color;</span>
+    }
+
+    public void setColor(int color) {
+<span class="nc" id="L27">        this.color = color;</span>
+<span class="nc" id="L28">    }</span>
+
+    public int getCant() {
+<span class="nc" id="L31">        return this.cant;</span>
+    }
+
+    public void setCant(int cant) {
+<span class="nc" id="L35">        this.cant = cant;</span>
+<span class="nc" id="L36">    }</span>
+
+    public Liquid color(int color) {
+<span class="nc" id="L39">        setColor(color);</span>
+<span class="nc" id="L40">        return this;</span>
+    }
+
+    public Liquid cant(int cant) {
+<span class="nc" id="L44">        setCant(cant);</span>
+<span class="nc" id="L45">        return this;</span>
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L50" title="All 2 branches missed.">        if (o == this)</span>
+<span class="nc" id="L51">            return true;</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        if (!(o instanceof Liquid)) {</span>
+<span class="nc" id="L53">            return false;</span>
+        }
+<span class="nc" id="L55">        Liquid liquid = (Liquid) o;</span>
+<span class="nc bnc" id="L56" title="All 4 branches missed.">        return color == liquid.color &amp;&amp; cant == liquid.cant;</span>
+    }
+    // clonamos 
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+    
+<span class="nc" id="L62">        return super.clone();</span>
+    }
+
+
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L69">        return Objects.hash(color, cant);</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L74">        return &quot;[&quot; + color+ &quot;,&quot; + cant + &quot;]&quot; ;</span>
+    }
+    
+    public Liquid deepCopy() {
+<span class="nc" id="L78">    	Liquid copy = new Liquid(this.color, this.cant);</span>
+<span class="nc" id="L79">        copy.setColor(copy.getColor());</span>
+<span class="nc" id="L80">        copy.setCant(copy.getCant());</span>
+<span class="nc" id="L81">        return copy;</span>
+    }
+
+    public void modificarCantidad(int cantidad) {
+<span class="nc" id="L85">    	this.cant += cantidad;</span>
+<span class="nc" id="L86">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

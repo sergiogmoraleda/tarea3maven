@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Sucesor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tarea3maven</a> &gt; <a href="index.source.html" class="el_package">com.example</a> &gt; <span class="el_source">Sucesor.java</span></div><h1>Sucesor.java</h1><pre class="source lang-java linenums">package com.example;
+
+
+import java.util.Objects;
+
+
+public class Sucesor {
+    
+    private Accion accion;
+    private Estado estado;
+    private double costo;
+
+
+
+<span class="nc" id="L15">    public Sucesor() {</span>
+<span class="nc" id="L16">    }</span>
+
+<span class="nc" id="L18">    public Sucesor(Accion accion, Estado estado, double costo) {</span>
+<span class="nc" id="L19">        this.accion = accion;</span>
+<span class="nc" id="L20">        this.estado = estado;</span>
+<span class="nc" id="L21">        this.costo = costo;</span>
+<span class="nc" id="L22">    }</span>
+
+    public Accion getAccion() {
+<span class="nc" id="L25">        return this.accion;</span>
+    }
+
+    public void setAccion(Accion accion) {
+<span class="nc" id="L29">        this.accion = accion;</span>
+<span class="nc" id="L30">    }</span>
+
+    public Estado getEstado() {
+<span class="nc" id="L33">        return estado;</span>
+    }
+
+    public void setEstado(Estado estado) {
+<span class="nc" id="L37">        this.estado = estado;</span>
+<span class="nc" id="L38">    }</span>
+
+    public double getCosto() {
+<span class="nc" id="L41">        return this.costo;</span>
+    }
+
+    public void setCosto(double costo) {
+<span class="nc" id="L45">        this.costo = costo;</span>
+<span class="nc" id="L46">    }</span>
+
+    public Sucesor accion(Accion accion) {
+<span class="nc" id="L49">        setAccion(accion);</span>
+<span class="nc" id="L50">        return this;</span>
+    }
+
+    public Sucesor estado(Estado estado) {
+<span class="nc" id="L54">        setEstado(estado);</span>
+<span class="nc" id="L55">        return this;</span>
+    }
+
+    public Sucesor costo(double costo) {
+<span class="nc" id="L59">        setCosto(costo);</span>
+<span class="nc" id="L60">        return this;</span>
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L65" title="All 2 branches missed.">        if (o == this)</span>
+<span class="nc" id="L66">            return true;</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        if (!(o instanceof Sucesor)) {</span>
+<span class="nc" id="L68">            return false;</span>
+        }
+<span class="nc" id="L70">        Sucesor sucesor = (Sucesor) o;</span>
+<span class="nc bnc" id="L71" title="All 6 branches missed.">        return Objects.equals(accion, sucesor.accion) &amp;&amp; Objects.equals(estado, sucesor.estado) &amp;&amp; costo == sucesor.costo;</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L76">        return Objects.hash(accion, estado, costo);</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L81">        return &quot;{&quot; +</span>
+<span class="nc" id="L82">            &quot; accion='&quot; + getAccion() + &quot;'&quot; +</span>
+<span class="nc" id="L83">            &quot;, estado='&quot; + getEstado().toString() + &quot;'&quot; +</span>
+<span class="nc" id="L84">            &quot;, costo='&quot; + getCosto() + &quot;'&quot; +</span>
+            &quot;}&quot;;
+    }
+
+    public void imprimir() {
+<span class="nc" id="L89">        System.out.print(&quot;\n&quot;+ accion.toString()+&quot;\n&quot;);</span>
+<span class="nc" id="L90">        estado.imprimir();</span>
+<span class="nc" id="L91">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

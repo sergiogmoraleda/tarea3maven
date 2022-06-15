@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>App.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tarea3maven</a> &gt; <a href="index.source.html" class="el_package">com.example</a> &gt; <span class="el_source">App.java</span></div><h1>App.java</h1><pre class="source lang-java linenums">package com.example;
+
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Scanner;
+import java.util.Stack;
+import com.google.gson.*;
+
+<span class="nc" id="L20">public class App {</span>
+
+	public static void menu() throws FileNotFoundException, IOException, ParseException, org.json.simple.parser.ParseException, CloneNotSupportedException{
+<span class="nc" id="L23">		final Scanner sc = new Scanner(System.in);</span>
+<span class="nc" id="L24">		boolean salir = false;</span>
+<span class="nc" id="L25">		int opcion = -1;</span>
+
+<span class="nc bnc" id="L27" title="All 2 branches missed.">		while (salir == false) {</span>
+<span class="nc" id="L28">			System.out.println(&quot;\nIntroduce número para escoger una opcion y pulse Enter\n &quot;</span>
+					+ &quot; 1.- Leer un problema.json (Por defecto p0.json). \n&quot;
+					+ &quot; 2.- Escribir un Problema. \n&quot; + &quot;0.- Salir del programa \n&quot;);
+<span class="nc" id="L31">			opcion = sc.nextInt();</span>
+
+<span class="nc bnc" id="L33" title="All 2 branches missed.">			switch (opcion) {</span>
+				case 1:
+
+
+
+<span class="nc" id="L38">					Problema problema = new Problema(&quot;src/main/java/com/example/p0.json&quot;);</span>
+
+<span class="nc" id="L40">					Estado e = new Estado(problema.getInitState().getEstado(), problema.getBottleSize());</span>
+<span class="nc" id="L41">					e.toString();</span>
+<span class="nc" id="L42">					String stringEstado = e.getStringEstadoCorrecto();</span>
+					//Estado eCopia = (Estado) e.deepCopy();
+					//tring stringEstadoCorrecto = eCopia.getStringEstadoCorrecto();
+					// pasamos la lista de botellas a string
+<span class="nc" id="L46">					System.out.println(&quot;hash del estado correcto:&quot; + JsonUtil.getHashMD5(stringEstado));</span>
+					//List&lt;Sucesor&gt;sucesores = problema.getSucesores(problema.getInitState());
+					//mostramos sucesores
+					/* for (Sucesor s : sucesores) {
+						s.imprimir();
+					}
+					 */
+<span class="nc" id="L53">					 int estrategia = 0;</span>
+<span class="nc" id="L54">					System.out.println(&quot;Problema elegido: &quot; + problema.toString());</span>
+					do {
+<span class="nc" id="L56">						System.out.println(&quot;Ahora debe elegir estrategia:\n&quot; +</span>
+								&quot;1.- BREADTH \n&quot; + &quot;2.- DEPTH \n&quot; + &quot;3.- UNIFORM \n&quot; + &quot;4.- GREEDY \n&quot; +
+								&quot;5.- A \n&quot;);
+<span class="nc" id="L59">						estrategia = sc.nextInt();</span>
+
+<span class="nc bnc" id="L61" title="All 4 branches missed.">					} while (estrategia &lt; 1 || estrategia &gt; 5);</span>
+
+<span class="nc" id="L63">					String estrategiaString = seleccionarEstrategia(estrategia);</span>
+<span class="nc" id="L64">					System.out.println(&quot;Estrategia elegida: &quot; + estrategiaString);</span>
+<span class="nc" id="L65">					System.out.println(&quot;\n&quot;);</span>
+
+					// resolvemos problema
+<span class="nc" id="L68">					algoritmoBusqueda(problema, estrategiaString, 1000000);</span>
+					
+ 
+<span class="nc" id="L71">					break;</span>
+
+			}
+		}
+<span class="nc" id="L75">	}</span>
+
+    // ALGORITMO DE BUSQUEDA
+    public static boolean algoritmoBusqueda(Problema p, String estrategia, int prof) throws CloneNotSupportedException {
+
+<span class="nc" id="L80">        boolean encontrado = false;</span>
+<span class="nc" id="L81">        Nodo nActual = null;</span>
+<span class="nc" id="L82">        Nodo nodoInicial = new Nodo(0.0, p.getInitState(), null, null, 0, 0, 0);</span>
+<span class="nc" id="L83">        nodoInicial.setValor(nodoInicial.calcularValorEstrategia(estrategia, nodoInicial));</span>
+
+<span class="nc" id="L85">        Frontera frontera = new Frontera();</span>
+<span class="nc" id="L86">        frontera.clear();</span>
+<span class="nc" id="L87">        frontera.add(nodoInicial);</span>
+
+<span class="nc" id="L89">        Map&lt;String, Double&gt; visitados = new HashMap&lt;String, Double&gt;(); // mapa de nodos visitados</span>
+<span class="nc" id="L90">        List&lt;Nodo&gt; listaNodosSolucion = new ArrayList&lt;Nodo&gt;();</span>
+
+<span class="nc bnc" id="L92" title="All 4 branches missed.">        while (!frontera.isEmpty() &amp;&amp; !encontrado) {</span>
+<span class="nc" id="L93">            nActual = frontera.remove();</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">            if (p.esObjetivo(nActual.getEstado())) {</span>
+<span class="nc" id="L95">                encontrado = true;</span>
+
+            } else {
+<span class="nc bnc" id="L98" title="All 4 branches missed.">                if (nActual.getProfundidad() &lt; prof &amp;&amp; !visitados.containsKey(nActual.getEstado().md5())) {</span>
+<span class="nc" id="L99">                    visitados.put(nActual.getEstado().md5(), nActual.getValor());</span>
+<span class="nc" id="L100">                        List&lt;Sucesor&gt; sucesores = new ArrayList&lt;Sucesor&gt;();</span>
+
+<span class="nc" id="L102">                    sucesores = p.getSucesores(nActual.getEstado());</span>
+<span class="nc" id="L103">                    List&lt;Nodo&gt; listaNodosSucesores = new ArrayList&lt;Nodo&gt;();</span>
+
+<span class="nc" id="L105">                    listaNodosSucesores = generarListaNodos(sucesores, nActual, prof, estrategia);</span>
+                    // expandimos frontera
+<span class="nc bnc" id="L107" title="All 2 branches missed.">                    for (Nodo n : listaNodosSucesores) {</span>
+<span class="nc" id="L108">                        n.setValor(n.calcularValorEstrategia(estrategia, n));</span>
+<span class="nc" id="L109">                        frontera.add(n);</span>
+<span class="nc" id="L110">                    }</span>
+                }
+                /*
+                 * if (nodoActual.getProfundidad() &lt; prof
+                 * &amp;&amp; !visitados.containsKey(nodoActual.getEstado().getMD5(jsonString))) {
+                 * visitados.put(nodoActual.getEstado().getMD5(jsonString),
+                 * nodoActual.getValor());
+                 * List&lt;Sucesor&gt; sucesores = p.getSucesores(nodoActual.getEstado());
+                 * 
+                 * }
+                 * }
+                 */
+
+            }
+            // si encontramos sol
+<span class="nc bnc" id="L125" title="All 2 branches missed.">            if (encontrado) {</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">                while (nActual.getPadre() != null) {</span>
+<span class="nc" id="L127">                    listaNodosSolucion.add(nActual);</span>
+<span class="nc" id="L128">                    nActual = nActual.getPadre();</span>
+                }
+<span class="nc" id="L130">                listaNodosSolucion.add(nActual);// este es el nodo inicial</span>
+<span class="nc" id="L131">                Collections.reverse(listaNodosSolucion);</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">                for (Nodo n : listaNodosSolucion) {</span>
+<span class="nc" id="L133">                    System.out.println(n.toString());</span>
+<span class="nc" id="L134">                }</span>
+            }
+
+        }
+<span class="nc" id="L138">        return encontrado;</span>
+
+    }
+	
+    public static List&lt;Nodo&gt; generarListaNodos(List&lt;Sucesor&gt; sucesores, Nodo nodo, int prof, String estrategia) {
+<span class="nc" id="L143">        List&lt;Nodo&gt; listaNodos = new ArrayList&lt;Nodo&gt;();</span>
+        
+<span class="nc bnc" id="L145" title="All 2 branches missed.">        if (nodo.getProfundidad() &lt; prof) {</span>
+<span class="nc" id="L146">			Nodo nodoAux = null;</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">            for (Sucesor s : sucesores) {</span>
+<span class="nc bnc" id="L148" title="All 4 branches missed.">                switch (estrategia) {</span>
+                    case &quot;BREADTH&quot;:
+<span class="nc" id="L150">                        nodoAux = new Nodo(nodo.getCostoAcumulado() + s.getCosto(), s.getEstado(), nodo, s.getAccion(),</span>
+<span class="nc" id="L151">                                nodo.getProfundidad() + 1, 0, nodo.getProfundidad() + 1);</span>
+<span class="nc" id="L152">                        break;</span>
+                    case &quot;DEPTH&quot;:
+<span class="nc" id="L154">                        nodoAux = new Nodo(nodo.getCostoAcumulado() + s.getCosto(), s.getEstado(), nodo, s.getAccion(),</span>
+<span class="nc" id="L155">                                nodo.getProfundidad() + 1, 0, (1.0 / (double) (nodo.getProfundidad() + 1)));</span>
+<span class="nc" id="L156">                        break;</span>
+
+                    case &quot;UNIFORM&quot;:
+<span class="nc" id="L159">                        nodoAux = new Nodo(nodo.getCostoAcumulado() + s.getCosto(), s.getEstado(), nodo, s.getAccion(),</span>
+<span class="nc" id="L160">                                nodo.getProfundidad() + 1, 0, nodo.getCostoAcumulado() + s.getCosto());</span>
+<span class="nc" id="L161">                        break;</span>
+
+                    default:
+                        break;
+                }
+<span class="nc" id="L166">                listaNodos.add(nodoAux);</span>
+
+<span class="nc" id="L168">            }</span>
+        }
+<span class="nc" id="L170">        return listaNodos;</span>
+    }
+
+	/*
+	 * 
+	 * 
+	 * do {
+	 * System.out.println(&quot;Ahora debe elegir la estrategia: \n&quot;
+	 * + &quot;1.- BREATH \n&quot; + &quot;2.- DEPTH \n&quot; + &quot;3.- UNIFORM \n&quot; + &quot;4.- GREEDY \n&quot; +
+	 * &quot;5.- A \n&quot;);
+	 * estrategia = sc.nextInt();
+	 * } while (estrategia &lt; 1 || estrategia &gt; 5);
+	 * String estrategiaString = seleccionarEstrategia(estrategia);
+	 * 
+	 * // ahora procederemos a resolver el problema
+	 * 
+	 * System.out.println(&quot;RESOLVIENDO PROBLEMA...&quot;);
+	 * List&lt;Nodo&gt; ListaNodosSolucion = new ArrayList&lt;&gt;();
+	 * PriorityQueue&lt;Nodo&gt; cola = new PriorityQueue&lt;Nodo&gt;();
+	 * Frontera frontera = new Frontera(cola);
+	 * ListaNodosSolucion = problema.algoritmsoBusqueda(problema,frontera,
+	 * estrategiaString);
+	 * //Mostramos la lista de nodos solucion
+	 * System.out.println(&quot;\nLista de nodos solucion: &quot;);
+	 * for (Nodo nodo : ListaNodosSolucion) {
+	 * System.out.println(nodo.toString());
+	 * }
+	 * 
+	 * try{
+	 * JsonUtil.escribirSolucion(ListaNodosSolucion);
+	 * }catch(NullPointerException e1){
+	 * System.out.println(&quot;No se encontró solución.&quot;);
+	 * }
+	 * 
+	 * break;
+	 * 
+	 * case 2:
+	 * // ---------------------------------por
+	 * hacer-------------------------------//
+	 * break;
+	 * case 0:
+	 * salir = true;
+	 * break;
+	 * 
+	 * }
+	 * 
+	 * }
+	 * if (salir == true) {
+	 * System.out.println(&quot;Gracias por usar el programa&quot;);
+	 * System.exit(0);
+	 * }
+	 * }
+	 * 
+	 * public static List&lt;Bottle&gt; seleccionarEstado(List&lt;Estado&gt; estados) {
+	 * Scanner sc = new Scanner(System.in);
+	 * Estado estado = new Estado();
+	 * int numero = -1;
+	 * boolean salir = false;
+	 * while (salir == false) {
+	 * System.out.
+	 * println(&quot; ----Para empezar, seleccione un estado de la lista leída anteriormente(número):---- &quot;
+	 * );
+	 * numero = sc.nextInt();
+	 * if (numero &gt;= 0 &amp;&amp; numero &lt; estados.size()) {
+	 * estado = estados.get(numero);
+	 * System.out.println(&quot;Estado seleccionado: &quot;);
+	 * estado.mostrarEstado();
+	 * salir = true;
+	 * } else {
+	 * System.out.println(&quot;El número debe estar entre 0 y &quot; + estados.size() + &quot;.&quot;);
+	 * }
+	 * }
+	 * List&lt;Bottle&gt; listaBotellas = estado.getEstado();
+	 * return listaBotellas;
+	 * 
+	 * }
+	 */
+	public static String seleccionarEstrategia(int estrategia) {
+<span class="nc" id="L248">		String estrategiaSeleccionada = &quot;&quot;;</span>
+<span class="nc bnc" id="L249" title="All 6 branches missed.">		switch (estrategia) {</span>
+			case 1:
+<span class="nc" id="L251">				estrategiaSeleccionada = &quot;BREADTH&quot;;</span>
+<span class="nc" id="L252">				break;</span>
+			case 2:
+<span class="nc" id="L254">				estrategiaSeleccionada = &quot;DEPTH&quot;;</span>
+<span class="nc" id="L255">				break;</span>
+			case 3:
+<span class="nc" id="L257">				estrategiaSeleccionada = &quot;UNIFORM&quot;;</span>
+<span class="nc" id="L258">				break;</span>
+			case 4:
+<span class="nc" id="L260">				estrategiaSeleccionada = &quot;GREEDY&quot;;</span>
+<span class="nc" id="L261">				break;</span>
+			case 5:
+<span class="nc" id="L263">				estrategiaSeleccionada = &quot;A&quot;;</span>
+				break;
+		}
+<span class="nc" id="L266">		return estrategiaSeleccionada;</span>
+	}
+
+	public static void main(String[] args) throws CloneNotSupportedException, NoSuchAlgorithmException,
+			FileNotFoundException, IOException, ParseException, org.json.simple.parser.ParseException {
+
+<span class="nc" id="L272">		menu();</span>
+
+<span class="nc" id="L274">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
