@@ -1,6 +1,7 @@
+package com.example;
 import org.junit.*;
 
-import com.example.Liquid;
+
 
 import static org.junit.Assert.*;
 
@@ -25,9 +26,21 @@ public class LiquidTest {
         assertEquals(5, l1.getCant());
     }
     @Test
-    public void LiquidTest() {
+    public void liquidTest() {
         Liquid l1 = new Liquid(1, 2);
         assertEquals(1, l1.getColor());
         assertEquals(2, l1.getCant());
+    }
+    @Test
+    public void assertEqualsTest() {
+        Liquid l1 = new Liquid(1, 2);
+        Liquid l2 = new Liquid(1, 2);
+        assertNotEquals(l1, l2);
+    }
+    @Test
+    public void liquidTest2() {
+        Liquid l1 = new Liquid(1,2);
+        Liquid l2 = new Liquid (l1);
+        assertTrue(l1.getCant() == l2.getCant() && l1.getColor() == l2.getColor());
     }
 }

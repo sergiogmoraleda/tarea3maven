@@ -34,7 +34,7 @@ public class Liquid  {
     public void setCant(int cant) {
         this.cant = cant;
     }
-
+  
     
 
 

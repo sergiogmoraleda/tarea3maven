@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 import java.util.Stack;
 
 import org.json.simple.JSONArray;
@@ -72,22 +72,6 @@ public class Problema {
         return this;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Problema)) {
-            return false;
-        }
-        Problema problema = (Problema) o;
-        return Objects.equals(id, problema.id) && bottleSize == problema.bottleSize
-                && Objects.equals(initState, problema.initState);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, bottleSize, initState);
-    }
 
     @Override
     public String toString() {
