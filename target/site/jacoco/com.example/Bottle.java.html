@@ -1,146 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Bottle.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tarea3maven</a> &gt; <a href="index.source.html" class="el_package">com.example</a> &gt; <span class="el_source">Bottle.java</span></div><h1>Bottle.java</h1><pre class="source lang-java linenums">package com.example;
 
-
 import java.util.*;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+
 
 public class Bottle implements JsonUtil {
 	private Stack&lt;Liquid&gt; liquido;
 
-<span class="nc" id="L12">	public Bottle() {</span>
-<span class="nc" id="L13">		liquido = new Stack();</span>
-<span class="nc" id="L14">	}</span>
+<span class="nc" id="L10">	public Bottle() {</span>
+<span class="nc" id="L11">		liquido = new Stack&lt;&gt;();</span>
+<span class="nc" id="L12">	}</span>
 
-<span class="nc" id="L16">	public Bottle(Stack&lt;Liquid&gt; liquido) {</span>
-<span class="nc" id="L17">		this.liquido = liquido;</span>
-<span class="nc" id="L18">	}</span>
+<span class="nc" id="L14">	public Bottle(Stack&lt;Liquid&gt; liquido) {</span>
+<span class="nc" id="L15">		this.liquido = liquido;</span>
+<span class="nc" id="L16">	}</span>
 
 	public Stack&lt;Liquid&gt; getLiquido() {
-<span class="nc" id="L21">		return this.liquido;</span>
+<span class="nc" id="L19">		return this.liquido;</span>
 	}
 
 	public void setLiquido(Stack&lt;Liquid&gt; liquidos) {
-<span class="nc" id="L25">		this.liquido = liquidos;</span>
-<span class="nc" id="L26">	}</span>
+<span class="nc" id="L23">		this.liquido = liquidos;</span>
+<span class="nc" id="L24">	}</span>
 
 	public Bottle liquido(Stack&lt;Liquid&gt; liquido) {
-<span class="nc" id="L29">		setLiquido(liquido);</span>
-<span class="nc" id="L30">		return this;</span>
+<span class="nc" id="L27">		setLiquido(liquido);</span>
+<span class="nc" id="L28">		return this;</span>
 	}
-/* 
-	@Override
-	public boolean equals(Object o) {
-		if (o == this)
-			return true;
-		if (!(o instanceof Bottle)) {
-			return false;
-		}
-		Bottle bottle = (Bottle) o;
-		return Objects.equals(liquido, bottle.liquido);
-	}
- */
-	@Override
-	public int hashCode() {
-<span class="nc" id="L46">		return Objects.hashCode(liquido);</span>
-	}
+	
 
 	@Override
 	public String toString() {
-<span class="nc" id="L51">		return &quot;&quot; + getLiquido() + &quot;&quot;;</span>
+<span class="nc" id="L34">		return &quot;&quot; + getLiquido() + &quot;&quot;;</span>
 	}
 
 	public Bottle deepCopy() {
-<span class="nc" id="L55">		Liquid auxiliar = null;</span>
-<span class="nc" id="L56">		Bottle copy = new Bottle();</span>
-<span class="nc" id="L57">		Stack&lt;Liquid&gt; aux = new Stack&lt;&gt;();</span>
-<span class="nc" id="L58">		Stack&lt;Liquid&gt; liquidoCopy = new Stack&lt;&gt;();</span>
-<span class="nc bnc" id="L59" title="All 2 branches missed.">		while(!this.liquido.isEmpty()) {</span>
-<span class="nc" id="L60">			aux.push(this.liquido.pop());</span>
+<span class="nc" id="L38">		Liquid auxiliar = null;</span>
+<span class="nc" id="L39">		Bottle copy = new Bottle();</span>
+<span class="nc" id="L40">		Stack&lt;Liquid&gt; aux = new Stack&lt;&gt;();</span>
+<span class="nc" id="L41">		Stack&lt;Liquid&gt; liquidoCopy = new Stack&lt;&gt;();</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">		while(!this.liquido.isEmpty()) {</span>
+<span class="nc" id="L43">			aux.push(this.liquido.pop());</span>
 		}
-<span class="nc bnc" id="L62" title="All 2 branches missed.">		while(!aux.isEmpty()) {</span>
-<span class="nc" id="L63">			auxiliar = aux.pop();</span>
-<span class="nc" id="L64">			this.liquido.push(auxiliar);</span>
-<span class="nc" id="L65">			liquidoCopy.push(auxiliar.deepCopy());</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">		while(!aux.isEmpty()) {</span>
+<span class="nc" id="L46">			auxiliar = aux.pop();</span>
+<span class="nc" id="L47">			this.liquido.push(auxiliar);</span>
+<span class="nc" id="L48">			liquidoCopy.push(auxiliar.deepCopy());</span>
 		}
-<span class="nc" id="L67">		copy.setLiquido(liquidoCopy);</span>
-<span class="nc" id="L68">		return copy;</span>
+<span class="nc" id="L50">		copy.setLiquido(liquidoCopy);</span>
+<span class="nc" id="L51">		return copy;</span>
 	}
 
 	public int getColorDeArriba() {
-<span class="nc bnc" id="L72" title="All 2 branches missed.">		if (!liquido.isEmpty()) {</span>
-<span class="nc" id="L73">			return liquido.peek().getColor();</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">		if (!liquido.isEmpty()) {</span>
+<span class="nc" id="L56">			return liquido.peek().getColor();</span>
 		} else {
-<span class="nc" id="L75">			return -1;</span>
+<span class="nc" id="L58">			return -1;</span>
 		}
 	}
 
 	public int getCantDeArriba() {
-<span class="nc" id="L80">		return liquido.peek().getCant();</span>
+<span class="nc" id="L63">		return liquido.peek().getCant();</span>
 	}
-	public void añadirLiquido(Liquid l) {
-<span class="nc" id="L83">		liquido.add(l);</span>
-<span class="nc" id="L84">	}</span>
+	public void anadirLiquido(Liquid l) {
+<span class="nc" id="L66">		liquido.add(l);</span>
+<span class="nc" id="L67">	}</span>
 
 	public int getCantidadliquido() {
-<span class="nc" id="L87">		int cantBotella = 0;</span>
-<span class="nc bnc" id="L88" title="All 2 branches missed.">		for(int i = 0; i &lt; liquido.size(); i++) {</span>
-<span class="nc" id="L89">			cantBotella += liquido.get(i).getCant();</span>
+<span class="nc" id="L70">		int cantBotella = 0;</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">		for(int i = 0; i &lt; liquido.size(); i++) {</span>
+<span class="nc" id="L72">			cantBotella += liquido.get(i).getCant();</span>
 		}
-<span class="nc" id="L91">		return cantBotella;</span>
+<span class="nc" id="L74">		return cantBotella;</span>
 	}
 	//clonamos el objeto
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-<span class="nc" id="L96">		Bottle cloned =  (Bottle) super.clone();</span>
-<span class="nc" id="L97">		cloned.liquido = new Stack&lt;Liquid&gt;();</span>
-<span class="nc" id="L98">		Stack&lt;Liquid&gt; aux = new Stack&lt;Liquid&gt;();</span>
-<span class="nc bnc" id="L99" title="All 2 branches missed.">		for (Liquid l : liquido) {</span>
-<span class="nc" id="L100">			aux.push(l);</span>
-<span class="nc" id="L101">		}</span>
-<span class="nc bnc" id="L102" title="All 2 branches missed.">		for (Liquid l : aux) {</span>
-<span class="nc" id="L103">			cloned.liquido.push((Liquid)l.clone());</span>
-<span class="nc" id="L104">		}</span>
-<span class="nc" id="L105">		return cloned;</span>
-	}
+
 	
 
 
 	public boolean isEmpty() {
-<span class="nc" id="L111">		return liquido.isEmpty();</span>
+<span class="nc" id="L82">		return liquido.isEmpty();</span>
 	}
 
 	public Liquid pop() {
-<span class="nc" id="L115">		return liquido.pop();</span>
+<span class="nc" id="L86">		return liquido.pop();</span>
 	}
 	public Liquid push(Liquid l) {
-<span class="nc" id="L118">		return liquido.push(l);</span>
+<span class="nc" id="L89">		return liquido.push(l);</span>
 	}
 
     public Liquid peek() {
-<span class="nc" id="L122">		return liquido.peek();</span>
+<span class="nc" id="L93">		return liquido.peek();</span>
         
     }
 	public String getStringBottle(){
-<span class="nc" id="L126">		String s = &quot;[&quot;;</span>
-<span class="nc" id="L127">		Stack&lt;Liquid&gt; botella = getLiquido();</span>
-<span class="nc bnc" id="L128" title="All 2 branches missed.">		for(int i = botella.size()-1; i &gt;= 0; i--) {</span>
-<span class="nc bnc" id="L129" title="All 2 branches missed.">			if(i&gt;0) {</span>
-<span class="nc" id="L130">				s += botella.get(i).toString() + &quot;,&quot;;</span>
+<span class="nc" id="L97">		StringBuilder s= new StringBuilder();</span>
+<span class="nc" id="L98">		s.append(&quot;[&quot;);</span>
+		
+<span class="nc" id="L100">		Stack&lt;Liquid&gt; botella = getLiquido();</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">		for(int i = botella.size()-1; i &gt;= 0; i--) {</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">			if(i&gt;0) {</span>
+<span class="nc" id="L103">				s.append(botella.get(i).toString() + &quot;,&quot;);</span>
 			}
-<span class="nc bnc" id="L132" title="All 2 branches missed.">			if(i== 0){</span>
-<span class="nc" id="L133">				s += botella.get(i).toString();</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">			if(i== 0){</span>
+<span class="nc" id="L106">				s.append(botella.get(i).toString());</span>
 			}
 		}
-<span class="nc" id="L136">		s += &quot;]&quot;;</span>
-<span class="nc" id="L137">		return s;</span>
+<span class="nc" id="L109">		s.append(&quot;]&quot;);</span>
+<span class="nc" id="L110">		return s.toString();</span>
+		
 
 	}
 
 	public int size() {
-<span class="nc" id="L142">		return liquido.size();</span>
+<span class="nc" id="L116">		return liquido.size();</span>
 	}
 	
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

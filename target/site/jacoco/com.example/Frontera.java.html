@@ -1,66 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Frontera.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tarea3maven</a> &gt; <a href="index.source.html" class="el_package">com.example</a> &gt; <span class="el_source">Frontera.java</span></div><h1>Frontera.java</h1><pre class="source lang-java linenums">package com.example;
 
-import java.util.List;
-import java.util.Objects;
 import java.util.PriorityQueue;
-import java.util.Queue;
 
 public class Frontera {
 
-	private PriorityQueue&lt;Nodo&gt; frontera;
+	private PriorityQueue&lt;Nodo&gt; f;
 
+<span class="nc" id="L9">	public Frontera() {</span>
+<span class="nc" id="L10">		this.f = new PriorityQueue&lt;&gt;();</span>
+<span class="nc" id="L11">	}</span>
 
-<span class="nc" id="L13">	public Frontera() {</span>
-<span class="nc" id="L14">		this.frontera = new PriorityQueue&lt;Nodo&gt;();</span>
+<span class="nc" id="L13">	public Frontera(PriorityQueue&lt;Nodo&gt; frontera) {</span>
+<span class="nc" id="L14">		this.f = frontera;</span>
 <span class="nc" id="L15">	}</span>
 
-<span class="nc" id="L17">	public Frontera(PriorityQueue&lt;Nodo&gt; frontera) {</span>
-<span class="nc" id="L18">		this.frontera = frontera;</span>
-<span class="nc" id="L19">	}</span>
-
 	public PriorityQueue&lt;Nodo&gt; getFrontera() {
-<span class="nc" id="L22">		return this.frontera;</span>
+<span class="nc" id="L18">		return this.f;</span>
 	}
 
 	public void setFrontera(PriorityQueue&lt;Nodo&gt; frontera) {
-<span class="nc" id="L26">		this.frontera = frontera;</span>
-<span class="nc" id="L27">	}</span>
+<span class="nc" id="L22">		this.f = frontera;</span>
+<span class="nc" id="L23">	}</span>
 
 	public Frontera frontera(PriorityQueue&lt;Nodo&gt; frontera) {
-<span class="nc" id="L30">		setFrontera(frontera);</span>
-<span class="nc" id="L31">		return this;</span>
+<span class="nc" id="L26">		setFrontera(frontera);</span>
+<span class="nc" id="L27">		return this;</span>
 	}
-/* 
-	@Override
-	public boolean equals(Object o) {
-		if (o == this)
-			return true;
-		if (!(o instanceof Frontera)) {
-			return false;
-		}
-		Frontera frontera = (Frontera) o;
-		return Objects.equals(frontera, frontera.frontera);
-	} */
-	//CLEAR FRONTERA
+
+	// CLEAR FRONTERA
 	public void clear() {
-<span class="nc" id="L46">		this.frontera.clear();</span>
-<span class="nc" id="L47">	}</span>
-	//ADD
+<span class="nc" id="L32">		this.f.clear();</span>
+<span class="nc" id="L33">	}</span>
+
+	// ADD
 	public void add(Nodo nodo) {
-<span class="nc" id="L50">		this.frontera.add(nodo);</span>
-<span class="nc" id="L51">	}</span>
-	//REMOVE
+<span class="nc" id="L37">		this.f.add(nodo);</span>
+<span class="nc" id="L38">	}</span>
+
+	// REMOVE
 	public Nodo remove() {
-<span class="nc" id="L54">		return this.frontera.remove();</span>
+<span class="nc" id="L42">		return this.f.remove();</span>
 	}
-	//IS EMPTY
+
+	// IS EMPTY
 	public boolean isEmpty() {
-<span class="nc" id="L58">		return this.frontera.isEmpty();</span>
+<span class="nc" id="L47">		return this.f.isEmpty();</span>
 	}
-
-
-	
-
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

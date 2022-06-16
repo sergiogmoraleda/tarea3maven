@@ -1,11 +1,11 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-tarea3maven,com.example,App,385,0,40,0,88,0,29,0,6,0
+tarea3maven,com.example,App,385,0,41,0,96,0,30,0,6,0
 tarea3maven,com.example,Accion,127,0,10,0,33,0,19,0,14,0
 tarea3maven,com.example,JsonUtil,27,0,0,0,8,0,1,0,1,0
-tarea3maven,com.example,Liquid,135,0,8,0,35,0,19,0,15,0
-tarea3maven,com.example,Problema,435,0,38,0,97,0,37,0,18,0
-tarea3maven,com.example,Bottle,267,0,18,0,59,0,28,0,19,0
-tarea3maven,com.example,Nodo,376,0,14,0,98,0,41,0,32,0
-tarea3maven,com.example,Estado,369,0,30,0,86,0,37,0,22,0
+tarea3maven,com.example,Liquid,67,65,8,0,17,17,10,8,6,8
+tarea3maven,com.example,Problema,426,0,38,0,93,0,37,0,18,0
+tarea3maven,com.example,Bottle,211,0,14,0,49,0,24,0,17,0
+tarea3maven,com.example,Nodo,358,0,20,0,107,0,45,0,33,0
+tarea3maven,com.example,Estado,278,0,20,0,67,0,28,0,18,0
 tarea3maven,com.example,Frontera,45,0,0,0,17,0,9,0,9,0
 tarea3maven,com.example,Sucesor,147,0,10,0,36,0,20,0,15,0
