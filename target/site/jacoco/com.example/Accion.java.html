@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Accion.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tarea3maven</a> &gt; <a href="index.source.html" class="el_package">com.example</a> &gt; <span class="el_source">Accion.java</span></div><h1>Accion.java</h1><pre class="source lang-java linenums">package com.example;
+
+import java.util.Objects;
+
+public class Accion {
+    private int botOrigen;
+    private int botDestino;
+    private int cantidad;
+
+
+<span class="nc" id="L11">    public Accion() {</span>
+<span class="nc" id="L12">    }</span>
+
+<span class="fc" id="L14">    public Accion(int botOrigen, int botDestino, int cantidad) {</span>
+<span class="fc" id="L15">        this.botOrigen = botOrigen;</span>
+<span class="fc" id="L16">        this.botDestino = botDestino;</span>
+<span class="fc" id="L17">        this.cantidad = cantidad;</span>
+<span class="fc" id="L18">    }</span>
+
+    public int getBotOrigen() {
+<span class="fc" id="L21">        return this.botOrigen;</span>
+    }
+
+    
+
+    public int getBotDestino() {
+<span class="fc" id="L27">        return this.botDestino;</span>
+    }
+
+    public int getCantidad() {
+<span class="fc" id="L31">        return this.cantidad;</span>
+    }
+
+
+
+    @Override
+    public String toString() {
+<span class="fc" id="L38">        return &quot;(&quot; +</span>
+<span class="fc" id="L39">             getBotOrigen() + &quot;, &quot; +</span>
+<span class="fc" id="L40">             getBotDestino() + &quot;, &quot; +</span>
+<span class="fc" id="L41">             getCantidad() + &quot;)&quot;;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

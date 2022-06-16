@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Estado.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tarea3maven</a> &gt; <a href="index.source.html" class="el_package">com.example</a> &gt; <span class="el_source">Estado.java</span></div><h1>Estado.java</h1><pre class="source lang-java linenums">package com.example;
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+
+
+
+public class Estado implements  JsonUtil {
+
+    private List&lt;Bottle&gt; e;
+    private int bottleSize;
+
+<span class="fc" id="L15">    public Estado() {</span>
+<span class="fc" id="L16">    }</span>
+
+<span class="fc" id="L18">    public Estado(List&lt;Bottle&gt; estado, int bottleSize) {</span>
+<span class="fc" id="L19">        this.e = estado;</span>
+<span class="fc" id="L20">        this.bottleSize = bottleSize;</span>
+<span class="fc" id="L21">    }</span>
+
+<span class="fc" id="L23">    public Estado(Estado accion) {</span>
+<span class="fc" id="L24">        this.e = accion.getEstado();</span>
+<span class="fc" id="L25">        this.bottleSize = accion.getBottleSize();</span>
+<span class="fc" id="L26">    }</span>
+
+<span class="fc" id="L28">    public Estado(List&lt;Bottle&gt; listaBotellas) {</span>
+<span class="fc" id="L29">        this.e = listaBotellas;</span>
+<span class="fc" id="L30">    }</span>
+
+    public List&lt;Bottle&gt; getEstado() {
+<span class="fc" id="L33">        return e;</span>
+    }
+
+    public void setEstado(List&lt;Bottle&gt; estado) {
+<span class="fc" id="L37">        this.e = estado;</span>
+<span class="fc" id="L38">    }</span>
+
+    public int getBottleSize() {
+<span class="fc" id="L41">        return this.bottleSize;</span>
+    }
+
+    public void setBottleSize(int bottleSize) {
+<span class="fc" id="L45">        this.bottleSize = bottleSize;</span>
+<span class="fc" id="L46">    }</span>
+
+    public Estado estado(List&lt;Bottle&gt; estado) {
+<span class="fc" id="L49">        setEstado(estado);</span>
+<span class="fc" id="L50">        return this;</span>
+    }
+
+
+
+
+    @Override
+    public String toString() {
+<span class="fc" id="L58">        String estadoCorrecto = null;</span>
+
+<span class="fc" id="L60">        estadoCorrecto = getStringEstadoCorrecto();</span>
+
+<span class="fc" id="L62">        return estadoCorrecto;</span>
+
+    }
+
+    public int indexOfBottle(Bottle bottle) {
+<span class="fc" id="L67">        return e.indexOf(bottle);</span>
+
+    }
+
+    public Estado deepCopy() {
+<span class="fc" id="L72">        List&lt;Bottle&gt; listaBotellas = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L73">        Bottle auxiliar = null;</span>
+<span class="fc bfc" id="L74" title="All 2 branches covered.">        for (int i = 0; i &lt; this.e.size(); i++) {</span>
+<span class="fc" id="L75">            auxiliar = this.e.get(i);</span>
+<span class="fc" id="L76">            listaBotellas.add(auxiliar.deepCopy());</span>
+
+        }
+<span class="fc" id="L79">        Estado copiado = new Estado(listaBotellas);</span>
+<span class="fc" id="L80">        copiado.setBottleSize(bottleSize);</span>
+<span class="fc" id="L81">        return copiado;</span>
+    }
+    // copiamos objeto sin que se cambie el original
+
+  
+    public boolean eSAccionPosible(Bottle botOrigen, Bottle botDestino, int cantidad) {
+<span class="fc" id="L87">        boolean esAccionPosible = false;</span>
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">        if (!botOrigen.getLiquido().isEmpty()) {</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">            if (!botDestino.getLiquido().isEmpty()) {</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">                if ((botDestino.getCantidadliquido() + cantidad) &lt;= this.bottleSize</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">                        &amp;&amp; botDestino.getLiquido().peek().getColor() == botOrigen.getLiquido().peek().getColor()) {</span>
+<span class="fc" id="L92">                    esAccionPosible = true;</span>
+                }
+            } else {
+<span class="fc" id="L95">                esAccionPosible = true;</span>
+            }
+        }
+
+<span class="fc" id="L99">        return esAccionPosible;</span>
+    }
+
+    public Estado accion(Bottle botOrigen, Bottle botDestino, int cantidad) {
+
+<span class="fc" id="L104">        int botOrigenIndex = this.indexOfBottle(botOrigen);</span>
+<span class="fc" id="L105">        int botDestinoIndex = this.indexOfBottle(botDestino);</span>
+
+        // creamos una copia del estado
+<span class="fc" id="L108">        Estado estadoCopia = this.deepCopy();</span>
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">        if (eSAccionPosible(botOrigen, botDestino, cantidad)) {</span>
+<span class="fc bfc" id="L110" title="All 2 branches covered.">            if (estadoCopia.getEstado().get(botDestinoIndex).getLiquido().isEmpty()) {</span>
+<span class="fc" id="L111">                estadoCopia.getEstado().get(botDestinoIndex).getLiquido().push(estadoCopia.getEstado().get(botOrigenIndex).getLiquido().pop());</span>
+            } else {
+<span class="fc" id="L113">                Liquid l = estadoCopia.getEstado().get(botOrigenIndex).getLiquido().pop();</span>
+<span class="fc" id="L114">                int cant = l.getCant();</span>
+<span class="fc" id="L115">                estadoCopia.getEstado().get(botDestinoIndex).getLiquido().peek().modificarCantidad(cant);</span>
+            }
+        }
+<span class="fc" id="L118">        return estadoCopia;</span>
+    }
+
+
+    public String getStringEstadoCorrecto() {
+<span class="fc" id="L123">        StringBuilder stringEstadoCorrecto =  new StringBuilder();</span>
+<span class="fc" id="L124">        stringEstadoCorrecto.append(&quot;[&quot;);</span>
+
+
+<span class="fc" id="L127">        List&lt;Bottle&gt; botellas = this.e;</span>
+
+<span class="fc bfc" id="L129" title="All 2 branches covered.">        for (int b = 0; b &lt; botellas.size(); b++) {</span>
+<span class="fc bfc" id="L130" title="All 2 branches covered.">            if (b != botellas.size() - 1) {</span>
+<span class="fc" id="L131">                stringEstadoCorrecto.append(botellas.get(b).getStringBottle() + &quot;,&quot;);</span>
+            } else {
+<span class="fc" id="L133">                stringEstadoCorrecto.append(botellas.get(b).getStringBottle());</span>
+            }
+
+        }
+<span class="fc" id="L137">        stringEstadoCorrecto.append(&quot;]&quot;);</span>
+        
+        
+<span class="fc" id="L140">        return stringEstadoCorrecto.toString();</span>
+    }
+
+    public String md5() {
+<span class="fc" id="L144">         return  JsonUtil.getHashMD5(getStringEstadoCorrecto());</span>
+        
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
