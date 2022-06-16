@@ -10,22 +10,6 @@ public class Frontera {
 		this.f = new PriorityQueue<>();
 	}
 
-	public Frontera(PriorityQueue<Nodo> frontera) {
-		this.f = frontera;
-	}
-
-	public PriorityQueue<Nodo> getFrontera() {
-		return this.f;
-	}
-
-	public void setFrontera(PriorityQueue<Nodo> frontera) {
-		this.f = frontera;
-	}
-
-	public Frontera frontera(PriorityQueue<Nodo> frontera) {
-		setFrontera(frontera);
-		return this;
-	}
 
 	// CLEAR FRONTERA
 	public void clear() {

@@ -21,16 +21,10 @@ public class Accion {
         return this.botOrigen;
     }
 
-    public void setBotOrigen(int botOrigen) {
-        this.botOrigen = botOrigen;
-    }
+    
 
     public int getBotDestino() {
         return this.botDestino;
-    }
-
-    public void setBotDestino(int botDestino) {
-        this.botDestino = botDestino;
     }
 
     public int getCantidad() {
