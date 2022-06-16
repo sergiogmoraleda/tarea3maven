@@ -21,7 +21,7 @@ public class Frontera {
 		this.f.add(nodo);
 	}
 
-	// REMOVE
+	// REMOVE a
 	public Nodo remove() {
 		return this.f.remove();
 	}
