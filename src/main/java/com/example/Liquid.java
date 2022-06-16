@@ -1,6 +1,6 @@
 package com.example;
 
-import java.util.Objects;
+
 
 public class Liquid  {
     private int color;
@@ -35,39 +35,8 @@ public class Liquid  {
         this.cant = cant;
     }
 
-    public Liquid color(int color) {
-        setColor(color);
-        return this;
-    }
-
-    public Liquid cant(int cant) {
-        setCant(cant);
-        return this;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Liquid)) {
-            return false;
-        }
-        Liquid liquid = (Liquid) o;
-        return color == liquid.color && cant == liquid.cant;
-    }
-    // clonamos 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
     
-        return super.clone();
-    }
 
-
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(color, cant);
-    }
 
     @Override
     public String toString() {
