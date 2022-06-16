@@ -141,7 +141,7 @@ public class Nodo implements Comparable<Nodo> {
             case "UNIFORM":
                 valorr = nodo.costoAcumulado;
                 break;
-            case "GREEDY":
+         /*    case "GREEDY":
                 valorr = nodo.heuristica;
                 break;
             case "A":
@@ -149,7 +149,7 @@ public class Nodo implements Comparable<Nodo> {
                 break;
                 default:
                     valorr = nodo.getProfundidad();
-        }
+      */   }
         return valorr;
     }
     

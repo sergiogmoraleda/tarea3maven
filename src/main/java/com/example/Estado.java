@@ -50,10 +50,7 @@ public class Estado implements  JsonUtil {
         return this;
     }
 
-    public Estado bottleSize(int bottleSize) {
-        setBottleSize(bottleSize);
-        return this;
-    }
+
 
 
     @Override
