@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.example.ProblemaTest" time="0.002" tests="7" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.example.EstadoTest" time="0.013" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="gnome"/>
     <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
@@ -57,11 +57,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="problemaTest" classname="com.example.ProblemaTest" time="0"/>
-  <testcase name="esObjetivoTest" classname="com.example.ProblemaTest" time="0"/>
-  <testcase name="initStateTest" classname="com.example.ProblemaTest" time="0"/>
-  <testcase name="equalsTest" classname="com.example.ProblemaTest" time="0"/>
-  <testcase name="toStringTest" classname="com.example.ProblemaTest" time="0"/>
-  <testcase name="getSucesoresTest" classname="com.example.ProblemaTest" time="0"/>
-  <testcase name="esObjetivoTest2" classname="com.example.ProblemaTest" time="0.001"/>
+  <testcase name="md5Test" classname="com.example.EstadoTest" time="0.013"/>
 </testsuite>

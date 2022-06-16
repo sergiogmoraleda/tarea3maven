@@ -18,7 +18,7 @@ public class Accion {
 <span class="fc" id="L18">    }</span>
 
     public int getBotOrigen() {
-<span class="nc" id="L21">        return this.botOrigen;</span>
+<span class="fc" id="L21">        return this.botOrigen;</span>
     }
 
     public void setBotOrigen(int botOrigen) {
@@ -26,7 +26,7 @@ public class Accion {
 <span class="nc" id="L26">    }</span>
 
     public int getBotDestino() {
-<span class="nc" id="L29">        return this.botDestino;</span>
+<span class="fc" id="L29">        return this.botDestino;</span>
     }
 
     public void setBotDestino(int botDestino) {
@@ -34,50 +34,17 @@ public class Accion {
 <span class="nc" id="L34">    }</span>
 
     public int getCantidad() {
-<span class="nc" id="L37">        return this.cantidad;</span>
+<span class="fc" id="L37">        return this.cantidad;</span>
     }
 
-    public void setCantidad(int cantidad) {
-<span class="nc" id="L41">        this.cantidad = cantidad;</span>
-<span class="nc" id="L42">    }</span>
 
-    public Accion botOrigen(int botOrigen) {
-<span class="nc" id="L45">        setBotOrigen(botOrigen);</span>
-<span class="nc" id="L46">        return this;</span>
-    }
-
-    public Accion botDestino(int botDestino) {
-<span class="nc" id="L50">        setBotDestino(botDestino);</span>
-<span class="nc" id="L51">        return this;</span>
-    }
-
-    public Accion cantidad(int cantidad) {
-<span class="nc" id="L55">        setCantidad(cantidad);</span>
-<span class="nc" id="L56">        return this;</span>
-    }
-
-    @Override
-    public boolean equals(Object o) {
-<span class="nc bnc" id="L61" title="All 2 branches missed.">        if (o == this)</span>
-<span class="nc" id="L62">            return true;</span>
-<span class="nc bnc" id="L63" title="All 2 branches missed.">        if (!(o instanceof Accion)) {</span>
-<span class="nc" id="L64">            return false;</span>
-        }
-<span class="nc" id="L66">        Accion accion = (Accion) o;</span>
-<span class="nc bnc" id="L67" title="All 6 branches missed.">        return botOrigen == accion.botOrigen &amp;&amp; botDestino == accion.botDestino &amp;&amp; cantidad == accion.cantidad;</span>
-    }
-
-    @Override
-    public int hashCode() {
-<span class="nc" id="L72">        return Objects.hash(botOrigen, botDestino, cantidad);</span>
-    }
 
     @Override
     public String toString() {
-<span class="nc" id="L77">        return &quot;(&quot; +</span>
-<span class="nc" id="L78">             getBotOrigen() + &quot;, &quot; +</span>
-<span class="nc" id="L79">             getBotDestino() + &quot;, &quot; +</span>
-<span class="nc" id="L80">             getCantidad() + &quot;)&quot;;</span>
+<span class="fc" id="L44">        return &quot;(&quot; +</span>
+<span class="fc" id="L45">             getBotOrigen() + &quot;, &quot; +</span>
+<span class="fc" id="L46">             getBotDestino() + &quot;, &quot; +</span>
+<span class="fc" id="L47">             getCantidad() + &quot;)&quot;;</span>
     }
 
 }

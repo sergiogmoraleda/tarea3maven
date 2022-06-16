@@ -47,33 +47,22 @@ public class Nodo implements Comparable<Nodo> {
         return this.costoAcumulado;
     }
 
-    public void setCostoAcumulado(double costoAcumulado) {
-        this.costoAcumulado = costoAcumulado;
-    }
+    
 
     public Estado getEstado() {
         return this.estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
     }
 
     public Nodo getPadre() {
         return this.padre;
     }
 
-    public void setPadre(Nodo padre) {
-        this.padre = padre;
-    }
+   
 
     public Accion getAccion() {
         return this.accion;
     }
 
-    public void setAccion(Accion accion) {
-        this.accion = accion;
-    }
 
     public int getProfundidad() {
         return profundidad;
@@ -99,54 +88,11 @@ public class Nodo implements Comparable<Nodo> {
         this.valor = valor;
     }
 
-    public Nodo id(int id) {
-        setId(id);
-        return this;
-    }
-
-    public Nodo costoAcumulado(double costoAcumulado) {
-        setCostoAcumulado(costoAcumulado);
-        return this;
-    }
-
-    public Nodo estado(Estado estado) {
-        setEstado(estado);
-        return this;
-    }
-
-    public Nodo padre(Nodo padre) {
-        setPadre(padre);
-        return this;
-    }
-
-    public Nodo accion(Accion accion) {
-        setAccion(accion);
-        return this;
-    }
-
-    public Nodo profundidad(int profundidad) {
-        setProfundidad(profundidad);
-        return this;
-    }
-
-    public Nodo heuristica(float heuristica) {
-        setHeuristica(heuristica);
-        return this;
-    }
-
-    public Nodo valor(double valor) {
-        setValor(valor);
-        return this;
-    }
 
  
 
   
-    public String getMD5deEstado() throws NullPointerException{
-        String jsonCorrecto = getEstado().getStringEstadoCorrecto();
-        return  JsonUtil.getHashMD5(jsonCorrecto);
-        
-    }
+    
     //hashCode()
     @Override
     public int hashCode() {

@@ -37,40 +37,7 @@ public class Accion {
         return this.cantidad;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
 
-    public Accion botOrigen(int botOrigen) {
-        setBotOrigen(botOrigen);
-        return this;
-    }
-
-    public Accion botDestino(int botDestino) {
-        setBotDestino(botDestino);
-        return this;
-    }
-
-    public Accion cantidad(int cantidad) {
-        setCantidad(cantidad);
-        return this;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Accion)) {
-            return false;
-        }
-        Accion accion = (Accion) o;
-        return botOrigen == accion.botOrigen && botDestino == accion.botDestino && cantidad == accion.cantidad;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(botOrigen, botDestino, cantidad);
-    }
 
     @Override
     public String toString() {

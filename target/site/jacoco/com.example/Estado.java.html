@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Estado.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tarea3maven</a> &gt; <a href="index.source.html" class="el_package">com.example</a> &gt; <span class="el_source">Estado.java</span></div><h1>Estado.java</h1><pre class="source lang-java linenums">package com.example;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+
 import java.util.List;
 
 
@@ -58,11 +58,11 @@ public class Estado implements  JsonUtil {
 
     @Override
     public String toString() {
-<span class="nc" id="L61">        String estadoCorrecto = null;</span>
+<span class="fc" id="L61">        String estadoCorrecto = null;</span>
 
-<span class="nc" id="L63">        estadoCorrecto = getStringEstadoCorrecto();</span>
+<span class="fc" id="L63">        estadoCorrecto = getStringEstadoCorrecto();</span>
 
-<span class="nc" id="L65">        return estadoCorrecto;</span>
+<span class="fc" id="L65">        return estadoCorrecto;</span>
 
     }
 
@@ -90,9 +90,9 @@ public class Estado implements  JsonUtil {
 <span class="fc" id="L90">        boolean esAccionPosible = false;</span>
 <span class="pc bpc" id="L91" title="1 of 2 branches missed.">        if (!botOrigen.getLiquido().isEmpty()) {</span>
 <span class="fc bfc" id="L92" title="All 2 branches covered.">            if (!botDestino.getLiquido().isEmpty()) {</span>
-<span class="pc bpc" id="L93" title="1 of 2 branches missed.">                if ((botDestino.getCantidadliquido() + cantidad) &lt;= this.bottleSize</span>
-<span class="nc bnc" id="L94" title="All 2 branches missed.">                        &amp;&amp; botDestino.getLiquido().peek().getColor() == botOrigen.getLiquido().peek().getColor()) {</span>
-<span class="nc" id="L95">                    esAccionPosible = true;</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">                if ((botDestino.getCantidadliquido() + cantidad) &lt;= this.bottleSize</span>
+<span class="fc bfc" id="L94" title="All 2 branches covered.">                        &amp;&amp; botDestino.getLiquido().peek().getColor() == botOrigen.getLiquido().peek().getColor()) {</span>
+<span class="fc" id="L95">                    esAccionPosible = true;</span>
                 }
             } else {
 <span class="fc" id="L98">                esAccionPosible = true;</span>
@@ -110,12 +110,12 @@ public class Estado implements  JsonUtil {
         // creamos una copia del estado
 <span class="fc" id="L111">        Estado estadoCopia = this.deepCopy();</span>
 <span class="pc bpc" id="L112" title="1 of 2 branches missed.">        if (eSAccionPosible(botOrigen, botDestino, cantidad)) {</span>
-<span class="pc bpc" id="L113" title="1 of 2 branches missed.">            if (estadoCopia.getEstado().get(botDestinoIndex).getLiquido().isEmpty()) {</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">            if (estadoCopia.getEstado().get(botDestinoIndex).getLiquido().isEmpty()) {</span>
 <span class="fc" id="L114">                estadoCopia.getEstado().get(botDestinoIndex).getLiquido().push(estadoCopia.getEstado().get(botOrigenIndex).getLiquido().pop());</span>
             } else {
-<span class="nc" id="L116">                Liquid l = estadoCopia.getEstado().get(botOrigenIndex).getLiquido().pop();</span>
-<span class="nc" id="L117">                int cant = l.getCant();</span>
-<span class="nc" id="L118">                estadoCopia.getEstado().get(botDestinoIndex).getLiquido().peek().modificarCantidad(cant);</span>
+<span class="fc" id="L116">                Liquid l = estadoCopia.getEstado().get(botOrigenIndex).getLiquido().pop();</span>
+<span class="fc" id="L117">                int cant = l.getCant();</span>
+<span class="fc" id="L118">                estadoCopia.getEstado().get(botDestinoIndex).getLiquido().peek().modificarCantidad(cant);</span>
             }
         }
 <span class="fc" id="L121">        return estadoCopia;</span>
@@ -144,15 +144,9 @@ public class Estado implements  JsonUtil {
     }
 
     public String md5() {
-<span class="nc" id="L147">         return  JsonUtil.getHashMD5(getStringEstadoCorrecto());</span>
+<span class="fc" id="L147">         return  JsonUtil.getHashMD5(getStringEstadoCorrecto());</span>
         
     }
 
-    public void imprimir() {
-<span class="nc" id="L152">        Iterator&lt;Bottle&gt; it = e.iterator();</span>
-<span class="nc bnc" id="L153" title="All 2 branches missed.">        while (it.hasNext()) {</span>
-<span class="nc" id="L154">           System.out.print(it.next().getStringBottle());</span>
-        }
-<span class="nc" id="L156">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

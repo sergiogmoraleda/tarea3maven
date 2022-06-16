@@ -8,19 +8,19 @@ import java.security.MessageDigest;
 public interface JsonUtil {
 
 	public static String getHashMD5(String jsonS) {
-<span class="nc" id="L11">		String md5 = null;</span>
+<span class="fc" id="L11">		String md5 = null;</span>
 
 		try {
-<span class="nc" id="L14">			MessageDigest md = MessageDigest.getInstance(&quot;MD5&quot;);</span>
-<span class="nc" id="L15">			md.update(jsonS.getBytes(),0,jsonS.length());</span>
-<span class="nc" id="L16">			md5 = new BigInteger(1,md.digest()).toString(16);</span>
+<span class="fc" id="L14">			MessageDigest md = MessageDigest.getInstance(&quot;MD5&quot;);</span>
+<span class="fc" id="L15">			md.update(jsonS.getBytes(),0,jsonS.length());</span>
+<span class="fc" id="L16">			md5 = new BigInteger(1,md.digest()).toString(16);</span>
 <span class="nc" id="L17">		} catch (Exception e) {</span>
 <span class="nc" id="L18">			return null;</span>
 
 			
-<span class="nc" id="L21">			}</span>
+<span class="fc" id="L21">			}</span>
 		
-<span class="nc" id="L23">		return md5;</span>
+<span class="fc" id="L23">		return md5;</span>
 	}
 
 	

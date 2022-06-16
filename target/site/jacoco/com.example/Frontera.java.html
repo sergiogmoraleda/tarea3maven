@@ -6,9 +6,9 @@ public class Frontera {
 
 	private PriorityQueue&lt;Nodo&gt; f;
 
-<span class="nc" id="L9">	public Frontera() {</span>
-<span class="nc" id="L10">		this.f = new PriorityQueue&lt;&gt;();</span>
-<span class="nc" id="L11">	}</span>
+<span class="fc" id="L9">	public Frontera() {</span>
+<span class="fc" id="L10">		this.f = new PriorityQueue&lt;&gt;();</span>
+<span class="fc" id="L11">	}</span>
 
 <span class="nc" id="L13">	public Frontera(PriorityQueue&lt;Nodo&gt; frontera) {</span>
 <span class="nc" id="L14">		this.f = frontera;</span>
@@ -29,22 +29,22 @@ public class Frontera {
 
 	// CLEAR FRONTERA
 	public void clear() {
-<span class="nc" id="L32">		this.f.clear();</span>
-<span class="nc" id="L33">	}</span>
+<span class="fc" id="L32">		this.f.clear();</span>
+<span class="fc" id="L33">	}</span>
 
 	// ADD
 	public void add(Nodo nodo) {
-<span class="nc" id="L37">		this.f.add(nodo);</span>
-<span class="nc" id="L38">	}</span>
+<span class="fc" id="L37">		this.f.add(nodo);</span>
+<span class="fc" id="L38">	}</span>
 
 	// REMOVE
 	public Nodo remove() {
-<span class="nc" id="L42">		return this.f.remove();</span>
+<span class="fc" id="L42">		return this.f.remove();</span>
 	}
 
 	// IS EMPTY
 	public boolean isEmpty() {
-<span class="nc" id="L47">		return this.f.isEmpty();</span>
+<span class="fc" id="L47">		return this.f.isEmpty();</span>
 	}
 
 }

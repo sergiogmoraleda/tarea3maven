@@ -1,4 +1,9 @@
+com/example/EstadoTest.class
+com/example/FronteraTest.class
+com/example/NodoTest.class
+com/example/AccionTest.class
+com/example/AppTest.class
+com/example/SucesorTest.class
 com/example/BottleTest.class
 com/example/LiquidTest.class
-com/example/AppTest.class
 com/example/ProblemaTest.class

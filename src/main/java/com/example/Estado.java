@@ -1,7 +1,7 @@
 package com.example;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+
 import java.util.List;
 
 
@@ -148,10 +148,4 @@ public class Estado implements  JsonUtil {
         
     }
 
-    public void imprimir() {
-        Iterator<Bottle> it = e.iterator();
-        while (it.hasNext()) {
-           System.out.print(it.next().getStringBottle());
-        }
-    }
 }

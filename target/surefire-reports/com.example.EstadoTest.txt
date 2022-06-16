@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: com.example.LiquidTest
+Test set: com.example.EstadoTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in com.example.LiquidTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s - in com.example.EstadoTest
