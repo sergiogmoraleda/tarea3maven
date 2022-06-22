@@ -103,8 +103,8 @@ import java.util.Scanner;
                          
 <span class="fc" id="L104">						 List&lt;Sucesor&gt; sucesores = p.getSucesores(nActual.getEstado());</span>
                     
-
-<span class="fc" id="L107">					List&lt;Nodo&gt; listaNodosSucesores = generarListaNodos(sucesores, nActual, prof, estrategia);</span>
+<span class="fc" id="L106">						 List&lt;Nodo&gt; listaNodosSucesores = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L107">						listaNodosSucesores = generarListaNodos(sucesores, nActual, prof, estrategia);</span>
                     // expandimos frontera
 <span class="fc bfc" id="L109" title="All 2 branches covered.">                    for (Nodo n : listaNodosSucesores) {</span>
 <span class="fc" id="L110">                        n.setValor(n.calcularValorEstrategia(estrategia, n));</span>
@@ -138,7 +138,7 @@ import java.util.Scanner;
 <span class="pc bpc" id="L138" title="1 of 2 branches missed.">        if (nodo.getProfundidad() &lt; prof) {</span>
 <span class="fc" id="L139">			Nodo nodoAux = null;</span>
 <span class="fc bfc" id="L140" title="All 2 branches covered.">            for (Sucesor s : sucesores) {</span>
-<span class="pc bpc" id="L141" title="1 of 4 branches missed.">                switch (estrategia) {</span>
+<span class="pc bpc" id="L141" title="1 of 6 branches missed.">                switch (estrategia) {</span>
                     case &quot;BREADTH&quot;:
 <span class="fc" id="L143">                        nodoAux = new Nodo(nodo.getCostoAcumulado() + s.getCosto(), s.getEstado(), nodo, s.getAccion(),</span>
 <span class="fc" id="L144">                                nodo.getProfundidad() + 1, 0, nodo.getProfundidad() + (double)1);</span>
@@ -152,48 +152,56 @@ import java.util.Scanner;
 <span class="fc" id="L152">                        nodoAux = new Nodo(nodo.getCostoAcumulado() + s.getCosto(), s.getEstado(), nodo, s.getAccion(),</span>
 <span class="fc" id="L153">                                nodo.getProfundidad() + 1, 0, nodo.getCostoAcumulado() + s.getCosto());</span>
 <span class="fc" id="L154">                        break;</span>
+					case &quot;GREEDY&quot;:
+<span class="fc" id="L156">						nodoAux = new Nodo(nodo.getCostoAcumulado() + s.getCosto(), s.getEstado(), nodo, s.getAccion(), nodo.getProfundidad() + 1, nodo.getHeuristica(),nodo.getHeuristica() );</span>
+
+<span class="fc" id="L158">					break;</span>
+					case &quot;A&quot;:
+<span class="fc" id="L160">						nodoAux = new Nodo(nodo.getCostoAcumulado() + s.getCosto(), s.getEstado(), nodo, s.getAccion(), nodo.getProfundidad() + 1, nodo.getHeuristica(),nodo.getHeuristica() + s.getCosto()+nodo.getCostoAcumulado() );</span>
+
+<span class="fc" id="L162">					break;</span>
 
                     default:
                         break;
                 }
-<span class="fc" id="L159">                listaNodos.add(nodoAux);</span>
+<span class="fc" id="L167">                listaNodos.add(nodoAux);</span>
 
-<span class="fc" id="L161">            }</span>
+<span class="fc" id="L169">            }</span>
         }
-<span class="fc" id="L163">        return listaNodos;</span>
+<span class="fc" id="L171">        return listaNodos;</span>
     }
 
 
 	public static String seleccionarEstrategia(int estrategia) {
-<span class="fc" id="L168">		String estrategiaSeleccionada = &quot;&quot;;</span>
-<span class="fc bfc" id="L169" title="All 6 branches covered.">		switch (estrategia) {</span>
+<span class="fc" id="L176">		String estrategiaSeleccionada = &quot;&quot;;</span>
+<span class="fc bfc" id="L177" title="All 6 branches covered.">		switch (estrategia) {</span>
 			case 1:
-<span class="fc" id="L171">				estrategiaSeleccionada = &quot;BREADTH&quot;;</span>
-<span class="fc" id="L172">				break;</span>
+<span class="fc" id="L179">				estrategiaSeleccionada = &quot;BREADTH&quot;;</span>
+<span class="fc" id="L180">				break;</span>
 			case 2:
-<span class="fc" id="L174">				estrategiaSeleccionada = &quot;DEPTH&quot;;</span>
-<span class="fc" id="L175">				break;</span>
+<span class="fc" id="L182">				estrategiaSeleccionada = &quot;DEPTH&quot;;</span>
+<span class="fc" id="L183">				break;</span>
 			case 3:
-<span class="fc" id="L177">				estrategiaSeleccionada = &quot;UNIFORM&quot;;</span>
-<span class="fc" id="L178">				break;</span>
+<span class="fc" id="L185">				estrategiaSeleccionada = &quot;UNIFORM&quot;;</span>
+<span class="fc" id="L186">				break;</span>
 			case 4:
-<span class="fc" id="L180">				estrategiaSeleccionada = &quot;GREEDY&quot;;</span>
-<span class="fc" id="L181">				break;</span>
+<span class="fc" id="L188">				estrategiaSeleccionada = &quot;GREEDY&quot;;</span>
+<span class="fc" id="L189">				break;</span>
 			case 5:
-<span class="fc" id="L183">				estrategiaSeleccionada = &quot;A&quot;;</span>
-<span class="fc" id="L184">				break;</span>
+<span class="fc" id="L191">				estrategiaSeleccionada = &quot;A&quot;;</span>
+<span class="fc" id="L192">				break;</span>
 			default:
-<span class="fc" id="L186">				estrategiaSeleccionada = &quot;BREADTH&quot;;</span>
+<span class="fc" id="L194">				estrategiaSeleccionada = &quot;BREADTH&quot;;</span>
 				break;
 		}
-<span class="fc" id="L189">		return estrategiaSeleccionada;</span>
+<span class="fc" id="L197">		return estrategiaSeleccionada;</span>
 	}
 
 	public static void main(String[] args) throws org.json.simple.parser.ParseException {
 
-<span class="nc" id="L194">		menu();</span>
+<span class="nc" id="L202">		menu();</span>
 
-<span class="nc" id="L196">	}</span>
+<span class="nc" id="L204">	}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

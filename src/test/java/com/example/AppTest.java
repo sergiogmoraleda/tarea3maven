@@ -42,6 +42,24 @@ public class AppTest
         Boolean res = App.algoritmoBusqueda(problema, estrategia, prof);
         assertTrue(res);
     }  
+    @Test
+    public void algoritmoBusquedaTest4() throws IOException, ParseException{
+        Problema problema = new Problema("src/main/java/com/example/p0.json");
+        String estrategia = "GREEDY";
+        int prof = 1000000;
+        //resolvemos problema
+        Boolean res = App.algoritmoBusqueda(problema, estrategia, prof);
+        assertTrue(res);
+    }  
+    @Test
+    public void algoritmoBusquedaTest5() throws IOException, ParseException{
+        Problema problema = new Problema("src/main/java/com/example/p0.json");
+        String estrategia = "A";
+        int prof = 1000000;
+        //resolvemos problema
+        Boolean res = App.algoritmoBusqueda(problema, estrategia, prof);
+        assertTrue(res);
+    }  
     @Test 
     public void seleccionarEstrategiaTest() throws IOException, ParseException{
        for(int i = 1; i <=5 ; i++){

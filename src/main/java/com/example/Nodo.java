@@ -2,6 +2,7 @@ package com.example;
  
  
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 
 
@@ -31,7 +32,7 @@ public class Nodo implements Comparable<Nodo> {
         this.padre = padre;
         this.accion = accion;
         this.profundidad = profundidad;
-        this.heuristica = heuristica;
+        this.heuristica = obtenerValorHeuristico();
         this.valor = valor;
     }
 
@@ -141,15 +142,15 @@ public class Nodo implements Comparable<Nodo> {
             case "UNIFORM":
                 valorr = nodo.costoAcumulado;
                 break;
-         /*    case "GREEDY":
+             case "GREEDY":
                 valorr = nodo.heuristica;
                 break;
             case "A":
                 valorr = nodo.costoAcumulado + nodo.heuristica;
                 break;
-                default:
+            default:
                     valorr = nodo.getProfundidad();
-      */   }
+         }
         return valorr;
     }
     
@@ -188,5 +189,29 @@ public class Nodo implements Comparable<Nodo> {
               
         return result;
     }
+
+    private double obtenerValorHeuristico() {
+        double heu = 0;
+        ArrayList<Integer> coloresVisitados = new ArrayList<>();
+        for (int i = 0; i < estado.getEstado().size(); i++) {
+            if (colorHaSidoVisitado(coloresVisitados, estado.getEstado().get(i)) || estado.getEstado().get(i) == null) {
+                heu+= estado.getEstado().get(i).size()+1;
+            }else{
+                heu+= estado.getEstado().get(i).size();
+                coloresVisitados.add(estado.getEstado().get(i).getColorDeArriba());
+            }
+        }
+        heu-=estado.getEstado().size();
+        return heu;
+
+    }
+    private boolean colorHaSidoVisitado(ArrayList<Integer> coloresVisitados, Bottle bottle) {
+        if (coloresVisitados.contains(bottle.getColorDeArriba()))
+            return true;
+        else
+            return false;
+
+    }
+
   
 }

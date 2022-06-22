@@ -103,8 +103,8 @@ public class App {
                          
 						 List<Sucesor> sucesores = p.getSucesores(nActual.getEstado());
                     
-
-					List<Nodo> listaNodosSucesores = generarListaNodos(sucesores, nActual, prof, estrategia);
+						 List<Nodo> listaNodosSucesores = new ArrayList<>();
+						listaNodosSucesores = generarListaNodos(sucesores, nActual, prof, estrategia);
                     // expandimos frontera
                     for (Nodo n : listaNodosSucesores) {
                         n.setValor(n.calcularValorEstrategia(estrategia, n));
@@ -152,6 +152,14 @@ public class App {
                         nodoAux = new Nodo(nodo.getCostoAcumulado() + s.getCosto(), s.getEstado(), nodo, s.getAccion(),
                                 nodo.getProfundidad() + 1, 0, nodo.getCostoAcumulado() + s.getCosto());
                         break;
+					case "GREEDY":
+						nodoAux = new Nodo(nodo.getCostoAcumulado() + s.getCosto(), s.getEstado(), nodo, s.getAccion(), nodo.getProfundidad() + 1, nodo.getHeuristica(),nodo.getHeuristica() );
+
+					break;
+					case "A":
+						nodoAux = new Nodo(nodo.getCostoAcumulado() + s.getCosto(), s.getEstado(), nodo, s.getAccion(), nodo.getProfundidad() + 1, nodo.getHeuristica(),nodo.getHeuristica() + s.getCosto()+nodo.getCostoAcumulado() );
+
+					break;
 
                     default:
                         break;
